@@ -1,0 +1,11 @@
+.cache.mk
+.leds-f4-220.ko.cmd
+.leds-f4-220.mod.o.cmd
+.leds-f4-220.o.cmd
+.tmp_versions
+leds-f4-220.ko
+leds-f4-220.mod.c
+leds-f4-220.mod.o
+leds-f4-220.o
+modules.order
+Module.symvers
