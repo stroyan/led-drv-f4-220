@@ -18,3 +18,7 @@ void cleanup_module(void)
 {
 	printk(KERN_INFO "TerraMaster F4-220 LED module unloaded.\n");
 }
+
+MODULE_AUTHOR("Mike Stroyan <mike@stroyan.net>");
+MODULE_DESCRIPTION("F4-220 LED driver");
+MODULE_LICENSE("GPL");
