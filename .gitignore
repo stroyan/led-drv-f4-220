@@ -2,6 +2,7 @@
 .leds-f4-220.ko.cmd
 .leds-f4-220.mod.o.cmd
 .leds-f4-220.o.cmd
+.leds-f4-220.o.d
 .tmp_versions
 leds-f4-220.ko
 leds-f4-220.mod.c
