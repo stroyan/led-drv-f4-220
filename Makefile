@@ -10,6 +10,6 @@ KDIR ?= /lib/modules/`uname -r`/build
 KDIR :=/lib/modules/4.15.0-43-generic/build
 
 default:
-	$(MAKE) -C $(KDIR) M=$$PWD
+	$(MAKE) -C $(KDIR) M=$$PWD C=1
 endif
 
