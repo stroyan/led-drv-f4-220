@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "fs.h": "c",
+        "module.h": "c",
+        "device.h": "c",
+        "init.h": "c",
+        "types.h": "c",
+        "posix_types.h": "c",
+        "stddef.h": "c",
+        "compiler_types.h": "c",
+        "printk.h": "c",
+        "int-ll64.h": "c",
+        "io.h": "c",
+        "cpu-regs.h": "c",
+        "compiler.h": "c"
+    }
+}

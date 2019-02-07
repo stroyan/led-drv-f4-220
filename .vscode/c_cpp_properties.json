@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/usr/src/linux-headers-4.15.0-43/arch/x86/include/",
+                "/usr/src/linux-headers-4.15.0-43/",
+                "/usr/src/linux-headers-4.15.0-43/include/",
+                "/usr/src/linux-headers-4.15.0-43-generic/arch/x86/include/",
+                "/usr/src/linux-headers-4.15.0-43-generic/arch/x86/include/generated/",
+                "/usr/src/linux-headers-4.15.0-43-generic/",
+                "/usr/src/linux-headers-4.15.0-43-generic/include/",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "__KERNEL__"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
