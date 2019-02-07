@@ -7887,3 +7887,47 @@ Do you want to print 852 lines? (y/N)
 
 [Jan 4 14:45] psmouse: version magic '4.15.18+ SMP mod_unload ' should be '4.15.0-42-generic SMP mod_unload '
 
+These ioremap_nocache calls look OK.
+gpbcon[0] = ioremap_nocache(0xfed0d1b8, 16);
+gpbcon[1] = ioremap_nocache(0xfed0d028, 16);
+gpbcon[2] = ioremap_nocache(0xfed0d0b8, 16);
+gpbcon[3] = ioremap_nocache(0xfed0d0d8, 16);
+gpbcon[4] = ioremap_nocache(0xfed0d088, 16);
+gpbcon[5] = ioremap_nocache(0xfed0d0a8, 16);
+gpbcon[6] = ioremap_nocache(0xfed0d048, 16);
+gpbcon[7] = ioremap_nocache(0xfed0d068, 16);
+gpbcon[8] = ioremap_nocache(0xfed0d018, 16);
+gpbcon[9] = ioremap_nocache(0xfed0d038, 16);
+gpbcon[10] = ioremap_nocache(0xfed0d058, 16);
+gpbcon[11] = ioremap_nocache(0xfed0d098, 16);
+
+Turning a light on looks like this-
+u64 reg;
+reg = readq(addr);
+reg &= 0x11111101;
+writeq(reg, addr);
+reg = readq(addr);
+reg |= 0x1;
+writeq(reg, addr);
+reg = readq(addr);
+reg |= 0x10;
+writeq(reg, addr);
+
+Turning a light off looks like this-
+u64 reg;
+reg = readq(addr);
+reg &= 0x11111101;
+writeq(reg, addr);
+reg = readq(addr);
+reg &= ~0x1ul;
+writeq(reg, addr);
+reg = readq(addr);
+reg |= 0x10;
+writeq(reg, addr);
+
+But in practice on and off is not so clear.
+Lights 1, 3, 5, 7 turn green leds "off" for "on" for "HD1", "HD2", "HD3" and "HD4".
+Lights 2, 4, 6, 8 turn red leds "off" for "off" for "HD1", "HD2", "HD3" and "HD4".
+Lights 9 and 10 change nothing.
+Light 11 turns a green led "off" for "on" for "LAN1".
+
