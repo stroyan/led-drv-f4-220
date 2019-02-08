@@ -7931,3 +7931,16 @@ Lights 2, 4, 6, 8 turn red leds "off" for "off" for "HD1", "HD2", "HD3" and "HD4
 Lights 9 and 10 change nothing.
 Light 11 turns a green led "off" for "on" for "LAN1".
 
+mike@b2:~$ sudo modprobe leds-f4-220
+mike@b2:~$ sudo bash -c 'echo -n led1off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led1off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led1on > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led3off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led3off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led3on > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led3off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led3off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led1off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led2off > /dev/leds'
+mike@b2:~$ sudo bash -c 'echo -n led2on > /dev/leds'
+
