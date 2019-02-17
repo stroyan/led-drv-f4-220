@@ -6,10 +6,13 @@ else
 # normal makefile
 KDIR ?= /lib/modules/`uname -r`/build
 
-# Force cross OS build
-KDIR :=/lib/modules/4.15.0-43-generic/build
-
 default:
 	$(MAKE) -C $(KDIR) M=$$PWD C=1
+
+install:
+	make -C $(KDIR) M=$$PWD modules_install
+
+clean:
+	make -C $(KDIR) M=$$PWD clean
 endif
 
