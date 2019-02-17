@@ -7944,3 +7944,16 @@ mike@b2:~$ sudo bash -c 'echo -n led1off > /dev/leds'
 mike@b2:~$ sudo bash -c 'echo -n led2off > /dev/leds'
 mike@b2:~$ sudo bash -c 'echo -n led2on > /dev/leds'
 
+
+There is a lot of information on RAID status available from /proc/mdstat,
+mdadm, and /sys/*.
+A mdadm command can monitor for RAID status changes and run a command.
+But mdadm and /proc/mdstat don't seem to give good details about which disks
+or partitions have a problem.
+
+The /sys files can give more useful and detailed information about status.
+The /sys files are documented in "man md" and
+"Documentation/md/admin-guide/md.rst .
+
+$ more /sys/block/md*/md/rd*/state
+$ ll /sys/block/md*/md/rd*
