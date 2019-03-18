@@ -149,6 +149,82 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 	else if (!strcmp("led12off", buffer)) {
 		turn_off(gpbcon[11]);
 	}
+	else if (!strcmp("HD1_off", buffer)) {
+		turn_on(gpbcon[1]);
+		turn_off(gpbcon[2]);
+	}
+	else if (!strcmp("HD1_green", buffer)) {
+		turn_off(gpbcon[1]);
+		turn_off(gpbcon[2]);
+	}
+	else if (!strcmp("HD1_yellow", buffer)) {
+		turn_off(gpbcon[1]);
+		turn_on(gpbcon[2]);
+	}
+	else if (!strcmp("HD1_red", buffer)) {
+		turn_on(gpbcon[1]);
+		turn_on(gpbcon[2]);
+	}
+	else if (!strcmp("HD2_off", buffer)) {
+		turn_on(gpbcon[3]);
+		turn_off(gpbcon[4]);
+	}
+	else if (!strcmp("HD2_green", buffer)) {
+		turn_off(gpbcon[3]);
+		turn_off(gpbcon[4]);
+	}
+	else if (!strcmp("HD2_yellow", buffer)) {
+		turn_off(gpbcon[3]);
+		turn_on(gpbcon[4]);
+	}
+	else if (!strcmp("HD2_red", buffer)) {
+		turn_on(gpbcon[3]);
+		turn_on(gpbcon[4]);
+	}
+	else if (!strcmp("HD3_off", buffer)) {
+		turn_on(gpbcon[5]);
+		turn_off(gpbcon[6]);
+	}
+	else if (!strcmp("HD3_green", buffer)) {
+		turn_off(gpbcon[5]);
+		turn_off(gpbcon[6]);
+	}
+	else if (!strcmp("HD3_yellow", buffer)) {
+		turn_off(gpbcon[5]);
+		turn_on(gpbcon[6]);
+	}
+	else if (!strcmp("HD3_red", buffer)) {
+		turn_on(gpbcon[5]);
+		turn_on(gpbcon[6]);
+	}
+	else if (!strcmp("HD4_off", buffer)) {
+		turn_on(gpbcon[7]);
+		turn_off(gpbcon[8]);
+	}
+	else if (!strcmp("HD4_green", buffer)) {
+		turn_off(gpbcon[7]);
+		turn_off(gpbcon[8]);
+	}
+	else if (!strcmp("HD4_yellow", buffer)) {
+		turn_off(gpbcon[7]);
+		turn_on(gpbcon[8]);
+	}
+	else if (!strcmp("HD4_red", buffer)) {
+		turn_on(gpbcon[7]);
+		turn_on(gpbcon[8]);
+	}
+	else if (!strcmp("LAN1_off", buffer)) {
+		turn_on(gpbcon[11]);
+	}
+	else if (!strcmp("LAN1_green", buffer)) {
+		turn_off(gpbcon[11]);
+	}
+	/*
+	 * Lights 1, 3, 5, 7 turn green leds "off" for "on" for "HD1", "HD2", "HD3" and "HD4".
+     * Lights 2, 4, 6, 8 turn red leds "off" for "off" for "HD1", "HD2", "HD3" and "HD4".
+     * Lights 9 and 10 change nothing.
+     * Light 11 turns a green led "off" for "on" for "LAN1".
+	 */
 	return count;
 }
 
