@@ -26,7 +26,7 @@
 #include <linux/fs.h>
 #include <linux/uaccess.h>	/* for get_user and put_user */
 
-static void volatile __iomem *gpbcon[12];
+static void volatile __iomem *map[12];
 
 #define DEBUG 1
 
@@ -78,146 +78,146 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 	buffer[count] = 0;
 	printk(KERN_INFO "leds_write(%s)\n", buffer);
 	if (!strcmp("led1on", buffer)) {
-		turn_on(gpbcon[0]);
+		turn_on(map[0]);
 	}
 	else if (!strcmp("led1off", buffer)) {
-		turn_off(gpbcon[0]);
+		turn_off(map[0]);
 	}
 	else if (!strcmp("led2on", buffer)) {
-		turn_on(gpbcon[1]);
+		turn_on(map[1]);
 	}
 	else if (!strcmp("led2off", buffer)) {
-		turn_off(gpbcon[1]);
+		turn_off(map[1]);
 	}
 	else if (!strcmp("led3on", buffer)) {
-		turn_on(gpbcon[2]);
+		turn_on(map[2]);
 	}
 	else if (!strcmp("led3off", buffer)) {
-		turn_off(gpbcon[2]);
+		turn_off(map[2]);
 	}
 	else if (!strcmp("led4on", buffer)) {
-		turn_on(gpbcon[3]);
+		turn_on(map[3]);
 	}
 	else if (!strcmp("led4off", buffer)) {
-		turn_off(gpbcon[3]);
+		turn_off(map[3]);
 	}
 	else if (!strcmp("led5on", buffer)) {
-		turn_on(gpbcon[4]);
+		turn_on(map[4]);
 	}
 	else if (!strcmp("led5off", buffer)) {
-		turn_off(gpbcon[4]);
+		turn_off(map[4]);
 	}
 	else if (!strcmp("led6on", buffer)) {
-		turn_on(gpbcon[5]);
+		turn_on(map[5]);
 	}
 	else if (!strcmp("led6off", buffer)) {
-		turn_off(gpbcon[5]);
+		turn_off(map[5]);
 	}
 	else if (!strcmp("led7on", buffer)) {
-		turn_on(gpbcon[6]);
+		turn_on(map[6]);
 	}
 	else if (!strcmp("led7off", buffer)) {
-		turn_off(gpbcon[6]);
+		turn_off(map[6]);
 	}
 	else if (!strcmp("led8on", buffer)) {
-		turn_on(gpbcon[7]);
+		turn_on(map[7]);
 	}
 	else if (!strcmp("led8off", buffer)) {
-		turn_off(gpbcon[7]);
+		turn_off(map[7]);
 	}
 	else if (!strcmp("led9on", buffer)) {
-		turn_on(gpbcon[8]);
+		turn_on(map[8]);
 	}
 	else if (!strcmp("led9off", buffer)) {
-		turn_off(gpbcon[8]);
+		turn_off(map[8]);
 	}
 	else if (!strcmp("led10on", buffer)) {
-		turn_on(gpbcon[9]);
+		turn_on(map[9]);
 	}
 	else if (!strcmp("led10off", buffer)) {
-		turn_off(gpbcon[9]);
+		turn_off(map[9]);
 	}
 	else if (!strcmp("led11on", buffer)) {
-		turn_on(gpbcon[10]);
+		turn_on(map[10]);
 	}
 	else if (!strcmp("led11off", buffer)) {
-		turn_off(gpbcon[10]);
+		turn_off(map[10]);
 	}
 	else if (!strcmp("led12on", buffer)) {
-		turn_on(gpbcon[11]);
+		turn_on(map[11]);
 	}
 	else if (!strcmp("led12off", buffer)) {
-		turn_off(gpbcon[11]);
+		turn_off(map[11]);
 	}
 	else if (!strcmp("HD1_off", buffer)) {
-		turn_on(gpbcon[1]);
-		turn_off(gpbcon[2]);
+		turn_on(map[1]);
+		turn_off(map[2]);
 	}
 	else if (!strcmp("HD1_green", buffer)) {
-		turn_off(gpbcon[1]);
-		turn_off(gpbcon[2]);
+		turn_off(map[1]);
+		turn_off(map[2]);
 	}
 	else if (!strcmp("HD1_yellow", buffer)) {
-		turn_off(gpbcon[1]);
-		turn_on(gpbcon[2]);
+		turn_off(map[1]);
+		turn_on(map[2]);
 	}
 	else if (!strcmp("HD1_red", buffer)) {
-		turn_on(gpbcon[1]);
-		turn_on(gpbcon[2]);
+		turn_on(map[1]);
+		turn_on(map[2]);
 	}
 	else if (!strcmp("HD2_off", buffer)) {
-		turn_on(gpbcon[3]);
-		turn_off(gpbcon[4]);
+		turn_on(map[3]);
+		turn_off(map[4]);
 	}
 	else if (!strcmp("HD2_green", buffer)) {
-		turn_off(gpbcon[3]);
-		turn_off(gpbcon[4]);
+		turn_off(map[3]);
+		turn_off(map[4]);
 	}
 	else if (!strcmp("HD2_yellow", buffer)) {
-		turn_off(gpbcon[3]);
-		turn_on(gpbcon[4]);
+		turn_off(map[3]);
+		turn_on(map[4]);
 	}
 	else if (!strcmp("HD2_red", buffer)) {
-		turn_on(gpbcon[3]);
-		turn_on(gpbcon[4]);
+		turn_on(map[3]);
+		turn_on(map[4]);
 	}
 	else if (!strcmp("HD3_off", buffer)) {
-		turn_on(gpbcon[5]);
-		turn_off(gpbcon[6]);
+		turn_on(map[5]);
+		turn_off(map[6]);
 	}
 	else if (!strcmp("HD3_green", buffer)) {
-		turn_off(gpbcon[5]);
-		turn_off(gpbcon[6]);
+		turn_off(map[5]);
+		turn_off(map[6]);
 	}
 	else if (!strcmp("HD3_yellow", buffer)) {
-		turn_off(gpbcon[5]);
-		turn_on(gpbcon[6]);
+		turn_off(map[5]);
+		turn_on(map[6]);
 	}
 	else if (!strcmp("HD3_red", buffer)) {
-		turn_on(gpbcon[5]);
-		turn_on(gpbcon[6]);
+		turn_on(map[5]);
+		turn_on(map[6]);
 	}
 	else if (!strcmp("HD4_off", buffer)) {
-		turn_on(gpbcon[7]);
-		turn_off(gpbcon[8]);
+		turn_on(map[7]);
+		turn_off(map[8]);
 	}
 	else if (!strcmp("HD4_green", buffer)) {
-		turn_off(gpbcon[7]);
-		turn_off(gpbcon[8]);
+		turn_off(map[7]);
+		turn_off(map[8]);
 	}
 	else if (!strcmp("HD4_yellow", buffer)) {
-		turn_off(gpbcon[7]);
-		turn_on(gpbcon[8]);
+		turn_off(map[7]);
+		turn_on(map[8]);
 	}
 	else if (!strcmp("HD4_red", buffer)) {
-		turn_on(gpbcon[7]);
-		turn_on(gpbcon[8]);
+		turn_on(map[7]);
+		turn_on(map[8]);
 	}
 	else if (!strcmp("LAN1_off", buffer)) {
-		turn_on(gpbcon[11]);
+		turn_on(map[11]);
 	}
 	else if (!strcmp("LAN1_green", buffer)) {
-		turn_off(gpbcon[11]);
+		turn_off(map[11]);
 	}
 	/*
 	 * Lights 1, 3, 5, 7 turn green leds "off" for "on" for "HD1", "HD2", "HD3" and "HD4".
@@ -259,19 +259,19 @@ int init_module(void){
 	printk(KERN_INFO "TerraMaster F4-220 LED module loaded.\n");
 #endif
 
-	gpbcon[0] = ioremap_nocache(0xfed0d1b8, 16);
-	printk(KERN_INFO "ioremap_nocache(0xfed0d1b8,16) returned %p\n",gpbcon[0]);
-	gpbcon[1] = ioremap_nocache(0xfed0d028, 16);
-	gpbcon[2] = ioremap_nocache(0xfed0d0b8, 16);
-	gpbcon[3] = ioremap_nocache(0xfed0d0d8, 16);
-	gpbcon[4] = ioremap_nocache(0xfed0d088, 16);
-	gpbcon[5] = ioremap_nocache(0xfed0d0a8, 16);
-	gpbcon[6] = ioremap_nocache(0xfed0d048, 16);
-	gpbcon[7] = ioremap_nocache(0xfed0d068, 16);
-	gpbcon[8] = ioremap_nocache(0xfed0d018, 16);
-	gpbcon[9] = ioremap_nocache(0xfed0d038, 16);
-	gpbcon[10] = ioremap_nocache(0xfed0d058, 16);
-	gpbcon[11] = ioremap_nocache(0xfed0d098, 16);
+	map[0] = ioremap_nocache(0xfed0d1b8, 16);
+	printk(KERN_INFO "ioremap_nocache(0xfed0d1b8,16) returned %p\n",map[0]);
+	map[1] = ioremap_nocache(0xfed0d028, 16);
+	map[2] = ioremap_nocache(0xfed0d0b8, 16);
+	map[3] = ioremap_nocache(0xfed0d0d8, 16);
+	map[4] = ioremap_nocache(0xfed0d088, 16);
+	map[5] = ioremap_nocache(0xfed0d0a8, 16);
+	map[6] = ioremap_nocache(0xfed0d048, 16);
+	map[7] = ioremap_nocache(0xfed0d068, 16);
+	map[8] = ioremap_nocache(0xfed0d018, 16);
+	map[9] = ioremap_nocache(0xfed0d038, 16);
+	map[10] = ioremap_nocache(0xfed0d058, 16);
+	map[11] = ioremap_nocache(0xfed0d098, 16);
 
 	return 0;
 }
@@ -283,10 +283,9 @@ void cleanup_module(void)
 	printk(KERN_INFO "TerraMaster F4-220 LED module unloaded.\n");
 #endif
 	for (i = 0; i<12; i++)
-		iounmap(gpbcon[i]);
+		iounmap(map[i]);
 	misc_deregister(&leds_miscdev);
 }
-
 MODULE_AUTHOR("Mike Stroyan <mike@stroyan.net>");
 MODULE_DESCRIPTION("F4-220 LED driver");
 MODULE_LICENSE("GPL");
