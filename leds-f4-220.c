@@ -34,7 +34,7 @@ static int leds_open(struct inode *inode, struct file *file)
 {
 #ifdef DEBUG
 	printk(KERN_INFO "leds_open(%p)\n", file);
-#endif
+#endif // DEBUG
 
 	return 0;
 }
@@ -76,7 +76,9 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 	if (copy_from_user(&buffer, buf, count))
 		return -EFAULT;
 	buffer[count] = 0;
+#ifdef DEBUG
 	printk(KERN_INFO "leds_write(%s)\n", buffer);
+#endif // DEBUG
 	if (!strcmp("led1on", buffer)) {
 		turn_on(map[0]);
 	}
@@ -232,7 +234,7 @@ static int leds_release(struct inode *inode, struct file *file)
 {
 #ifdef DEBUG
 	printk(KERN_INFO "leds_release(%p)\n", file);
-#endif
+#endif // DEBUG
 	return 0;
 }
 
@@ -257,7 +259,7 @@ int init_module(void){
 		return error;
 #ifdef DEBUG
 	printk(KERN_INFO "TerraMaster F4-220 LED module loaded.\n");
-#endif
+#endif // DEBUG
 
 	static phys_addr_t map_addrs[12] = {
 		0xfed0d1b8,
@@ -278,7 +280,9 @@ int init_module(void){
 		map[map_id] = ioremap_nocache(map_addrs[map_id], 16);
 		if (!map[map_id]) {
 			int i;
+#ifdef DEBUG
 			printk(KERN_INFO "ioremap_nocache(%p,16) returned 0\n", map_addrs[map_id]);
+#endif // DEBUG
 			for (i = 0; i<map_id; i++)
 				iounmap(map[i]);
 			misc_deregister(&leds_miscdev);
@@ -292,7 +296,7 @@ void cleanup_module(void)
 	int i;
 #ifdef DEBUG
 	printk(KERN_INFO "TerraMaster F4-220 LED module unloaded.\n");
-#endif
+#endif // DEBUG
 	for (i = 0; i<12; i++)
 		iounmap(map[i]);
 	misc_deregister(&leds_miscdev);
