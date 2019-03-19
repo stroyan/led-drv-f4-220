@@ -152,74 +152,74 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 		turn_off(map[11]);
 	}
 	else if (!strcmp("HD1_off", buffer)) {
-		turn_on(map[1]);
-		turn_off(map[2]);
+		turn_on(map[0]);
+		turn_off(map[1]);
 	}
 	else if (!strcmp("HD1_green", buffer)) {
+		turn_off(map[0]);
 		turn_off(map[1]);
-		turn_off(map[2]);
 	}
 	else if (!strcmp("HD1_yellow", buffer)) {
-		turn_off(map[1]);
-		turn_on(map[2]);
+		turn_off(map[0]);
+		turn_on(map[1]);
 	}
 	else if (!strcmp("HD1_red", buffer)) {
+		turn_on(map[0]);
 		turn_on(map[1]);
-		turn_on(map[2]);
 	}
 	else if (!strcmp("HD2_off", buffer)) {
-		turn_on(map[3]);
-		turn_off(map[4]);
+		turn_on(map[2]);
+		turn_off(map[3]);
 	}
 	else if (!strcmp("HD2_green", buffer)) {
+		turn_off(map[2]);
 		turn_off(map[3]);
-		turn_off(map[4]);
 	}
 	else if (!strcmp("HD2_yellow", buffer)) {
-		turn_off(map[3]);
-		turn_on(map[4]);
+		turn_off(map[2]);
+		turn_on(map[3]);
 	}
 	else if (!strcmp("HD2_red", buffer)) {
+		turn_on(map[2]);
 		turn_on(map[3]);
-		turn_on(map[4]);
 	}
 	else if (!strcmp("HD3_off", buffer)) {
-		turn_on(map[5]);
-		turn_off(map[6]);
+		turn_on(map[4]);
+		turn_off(map[5]);
 	}
 	else if (!strcmp("HD3_green", buffer)) {
+		turn_off(map[4]);
 		turn_off(map[5]);
-		turn_off(map[6]);
 	}
 	else if (!strcmp("HD3_yellow", buffer)) {
-		turn_off(map[5]);
-		turn_on(map[6]);
+		turn_off(map[4]);
+		turn_on(map[5]);
 	}
 	else if (!strcmp("HD3_red", buffer)) {
+		turn_on(map[4]);
 		turn_on(map[5]);
-		turn_on(map[6]);
 	}
 	else if (!strcmp("HD4_off", buffer)) {
-		turn_on(map[7]);
-		turn_off(map[8]);
+		turn_on(map[6]);
+		turn_off(map[7]);
 	}
 	else if (!strcmp("HD4_green", buffer)) {
+		turn_off(map[6]);
 		turn_off(map[7]);
-		turn_off(map[8]);
 	}
 	else if (!strcmp("HD4_yellow", buffer)) {
-		turn_off(map[7]);
-		turn_on(map[8]);
+		turn_off(map[6]);
+		turn_on(map[7]);
 	}
 	else if (!strcmp("HD4_red", buffer)) {
+		turn_on(map[6]);
 		turn_on(map[7]);
-		turn_on(map[8]);
 	}
 	else if (!strcmp("LAN1_off", buffer)) {
-		turn_on(map[11]);
+		turn_on(map[10]);
 	}
 	else if (!strcmp("LAN1_green", buffer)) {
-		turn_off(map[11]);
+		turn_off(map[10]);
 	}
 	/*
 	 * Lights 1, 3, 5, 7 turn green leds "off" for "on" for "HD1", "HD2", "HD3" and "HD4".
