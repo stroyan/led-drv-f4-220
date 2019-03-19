@@ -252,8 +252,24 @@ static struct miscdevice leds_miscdev = {
 	.minor	= MISC_DYNAMIC_MINOR,
 };
 
+static phys_addr_t map_addrs[12] = {
+	0xfed0d1b8,
+	0xfed0d028,
+	0xfed0d0b8,
+	0xfed0d0d8,
+	0xfed0d088,
+	0xfed0d0a8,
+	0xfed0d048,
+	0xfed0d068,
+	0xfed0d018,
+	0xfed0d038,
+	0xfed0d058,
+	0xfed0d098
+};
+
 int init_module(void){
 	int error;
+	int map_id;
 	error = misc_register(&leds_miscdev);
 	if (error)
 		return error;
@@ -261,33 +277,19 @@ int init_module(void){
 	printk(KERN_INFO "TerraMaster F4-220 LED module loaded.\n");
 #endif // DEBUG
 
-	static phys_addr_t map_addrs[12] = {
-		0xfed0d1b8,
-		0xfed0d028,
-		0xfed0d0b8,
-		0xfed0d0d8,
-		0xfed0d088,
-		0xfed0d0a8,
-		0xfed0d048,
-		0xfed0d068,
-		0xfed0d018,
-		0xfed0d038,
-		0xfed0d058,
-		0xfed0d098
-	};
-	int map_id;
 	for (map_id = 0; map_id < 12; map_id++) {
 		map[map_id] = ioremap_nocache(map_addrs[map_id], 16);
 		if (!map[map_id]) {
 			int i;
 #ifdef DEBUG
-			printk(KERN_INFO "ioremap_nocache(%p,16) returned 0\n", map_addrs[map_id]);
+			printk(KERN_INFO "ioremap_nocache(%lld,16) returned 0\n", map_addrs[map_id]);
 #endif // DEBUG
 			for (i = 0; i<map_id; i++)
 				iounmap(map[i]);
 			misc_deregister(&leds_miscdev);
 			return ENOMEM;
 		}
+	}
 	return 0;
 }
 
