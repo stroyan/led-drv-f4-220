@@ -221,9 +221,9 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 	}
 	/*
 	 * Lights 1, 3, 5, 7 turn green leds "off" for "on" for "HD1", "HD2", "HD3" and "HD4".
-     * Lights 2, 4, 6, 8 turn red leds "off" for "off" for "HD1", "HD2", "HD3" and "HD4".
-     * Lights 9 and 10 change nothing.
-     * Light 11 turns a green led "off" for "on" for "LAN1".
+	 * Lights 2, 4, 6, 8 turn red leds "off" for "off" for "HD1", "HD2", "HD3" and "HD4".
+	 * Lights 9 and 10 change nothing.
+	 * Light 11 turns a green led "off" for "on" for "LAN1".
 	 */
 	return count;
 }
@@ -254,25 +254,36 @@ int init_module(void){
 	int error;
 	error = misc_register(&leds_miscdev);
 	if (error)
-        return error;
+		return error;
 #ifdef DEBUG
 	printk(KERN_INFO "TerraMaster F4-220 LED module loaded.\n");
 #endif
 
-	map[0] = ioremap_nocache(0xfed0d1b8, 16);
-	printk(KERN_INFO "ioremap_nocache(0xfed0d1b8,16) returned %p\n",map[0]);
-	map[1] = ioremap_nocache(0xfed0d028, 16);
-	map[2] = ioremap_nocache(0xfed0d0b8, 16);
-	map[3] = ioremap_nocache(0xfed0d0d8, 16);
-	map[4] = ioremap_nocache(0xfed0d088, 16);
-	map[5] = ioremap_nocache(0xfed0d0a8, 16);
-	map[6] = ioremap_nocache(0xfed0d048, 16);
-	map[7] = ioremap_nocache(0xfed0d068, 16);
-	map[8] = ioremap_nocache(0xfed0d018, 16);
-	map[9] = ioremap_nocache(0xfed0d038, 16);
-	map[10] = ioremap_nocache(0xfed0d058, 16);
-	map[11] = ioremap_nocache(0xfed0d098, 16);
-
+	static phys_addr_t map_addrs[12] = {
+		0xfed0d1b8,
+		0xfed0d028,
+		0xfed0d0b8,
+		0xfed0d0d8,
+		0xfed0d088,
+		0xfed0d0a8,
+		0xfed0d048,
+		0xfed0d068,
+		0xfed0d018,
+		0xfed0d038,
+		0xfed0d058,
+		0xfed0d098
+	};
+	int map_id;
+	for (map_id = 0; map_id < 12; map_id++) {
+		map[map_id] = ioremap_nocache(map_addrs[map_id], 16);
+		if (!map[map_id]) {
+			int i;
+			printk(KERN_INFO "ioremap_nocache(%p,16) returned 0\n", map_addrs[map_id]);
+			for (i = 0; i<map_id; i++)
+				iounmap(map[i]);
+			misc_deregister(&leds_miscdev);
+			return ENOMEM;
+		}
 	return 0;
 }
 
