@@ -1,0 +1,9 @@
+The Debian Package led-drv-f4-220
+----------------------------
+
+This is a linux driver for LED status lights of the TerraMaster F4-220.
+It was created looking at the binary of the driver module from TerraMaster.
+I later found there is now a GPL source version provided by TerraMaster at
+https://www.terra-master.com/code/led_drv_1800.c .
+
+ -- Mike Stroyan <mike@stroyan.net>  Mon, 13 Jan 2020 15:10:29 -0700

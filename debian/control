@@ -1,0 +1,17 @@
+Source: led-drv-f4-220
+Section: universe/utils
+Priority: optional
+Maintainer: Mike Stroyan <mike@stroyan.net>
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.4.0
+Homepage: https://github.com/stroyan/led-drv-f4-220
+Vcs-Browser: https://github.com/stroyan/led-drv-f4-220.git
+Vcs-Git: https://github.com/stroyan/led-drv-f4-220.git
+
+Package: led-drv-f4-220
+Architecture: amd64
+Depends: ${misc:Depends}, dkms
+Description: driver controlling LED status lights of TerraMaster f4-220
+ This driver controls TerraMaster f4-220 LED lights for hard drives and LAN.
+ It changes lights in response to writes to /dev/leds.
+ It does not monitor status and update lights itself.

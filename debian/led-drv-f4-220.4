@@ -1,0 +1,51 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2020 Mike Stroyan <mike@stroyan.net>,
+.\"
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH LED-DRV-F4-220 4 "January 15 2020"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+led-drv-f4-220 \- LED light control device
+.SH DESCRIPTION
+This manual page documents briefly the
+.B led-drv-f4-220
+device file.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invoke bold face and italics,
+.\" respectively.
+\fBled-drv-f4-220\fP is a driver that turns on and off hard drive and LAN status lights.
+.P
+There are red and green lights for hard drives and a green light for LAN.
+The lights can be set by number, (as an old driver did), or by name and color.
+The sense of "on" or "off" is reversed for some of the lights!
+Lights 1, 3, 5, 7 turn green leds "off" for "on" for "HD1", "HD2", "HD3" and "HD4".
+Lights 2, 4, 6, 8 turn red leds "off" for "off" for "HD1", "HD2", "HD3" and "HD4".
+Lights 9 and 10 change nothing.
+Light 11 turns a green led "off" for "on" for "LAN1".
+.SH FILES
+.IR /dev/leds
+The LED light control device file.
+.P
+.SH EXAMPLES
+.P
+.EX
+sudo bash -c 'echo HD1_green > /dev/leds'
+sudo bash -c 'echo HD2_yellow > /dev/leds'
+sudo bash -c 'echo HD3_red > /dev/leds'
+sudo bash -c 'echo HD4_black > /dev/leds'
+sudo bash -c 'echo LAN1_green > /dev/leds'
+.EE
