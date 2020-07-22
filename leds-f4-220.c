@@ -72,7 +72,7 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 {
 #define BUFSIZE 64
 	char buffer[BUFSIZE];
-	count = min(count, sizeof(buffer));
+	count = min(count, sizeof(buffer)-1);
 	if (copy_from_user(&buffer, buf, count))
 		return -EFAULT;
 	buffer[count] = 0;
