@@ -72,6 +72,7 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 {
 #define BUFSIZE 64
 	char buffer[BUFSIZE];
+	size_t cmdlen;
 	count = min(count, sizeof(buffer)-1);
 	if (copy_from_user(&buffer, buf, count))
 		return -EFAULT;
@@ -79,6 +80,13 @@ static ssize_t leds_write(struct file *file, const char __user *buf,
 #ifdef DEBUG
 	printk(KERN_INFO "leds_write(%s)\n", buffer);
 #endif // DEBUG
+
+	/* Strip trailing newline */
+	cmdlen = strlen(buffer);
+	if (cmdlen > 0 && buffer[cmdlen-1] == '\n') {
+		buffer[cmdlen-1] = 0;
+	}
+
 	if (!strcmp("led1on", buffer)) {
 		turn_on(map[0]);
 	}
