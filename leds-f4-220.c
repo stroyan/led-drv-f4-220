@@ -24,6 +24,7 @@
 #include <linux/device.h>
 #include <linux/miscdevice.h>
 #include <linux/fs.h>
+#include <linux/io.h>
 #include <linux/uaccess.h>	/* for get_user and put_user */
 
 static void volatile __iomem *map[12];
@@ -286,11 +287,11 @@ int init_module(void){
 #endif // DEBUG
 
 	for (map_id = 0; map_id < 12; map_id++) {
-		map[map_id] = ioremap_nocache(map_addrs[map_id], 16);
+		map[map_id] = ioremap(map_addrs[map_id], 16);
 		if (!map[map_id]) {
 			int i;
 #ifdef DEBUG
-			printk(KERN_INFO "ioremap_nocache(%lld,16) returned 0\n", map_addrs[map_id]);
+			printk(KERN_INFO "ioremap(%lld,16) returned 0\n", map_addrs[map_id]);
 #endif // DEBUG
 			for (i = 0; i<map_id; i++)
 				iounmap(map[i]);
